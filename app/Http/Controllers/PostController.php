@@ -19,11 +19,14 @@ class PostController extends Controller
         ];
         $data = $this->validate($request, $rules);
         $files = [];
-        foreach ($request->media as $file) {
-            $files[] = $file->store("uploads");
+        if ($request->has('media') && is_array($request->media)) {
+            foreach ($request->media as $file) {
+                $files[] = $file->store("uploads");
+            }
+
+            $data["media"] = $files;
         }
 
-        $data["media"] = $files;
 
         // TODO: Remove this and use logged in user
         $data["user_id"] = auth()->id();
