@@ -16,6 +16,9 @@ Route::group(["middleware"=>"auth"],function(){
     Route::get('/', 'FeedController@index');
     Route::post('/posts','PostController@createNewPost');
     Route::get('/posts','PostController@getAllPosts');
+    Route::get('/profile/{user}','UserController@profile');
+    Route::get('/users/{user}/posts','UserController@posts');
+    Route::post("/posts/{post}/comments","PostController@comment");
 });
 
 Auth::routes();

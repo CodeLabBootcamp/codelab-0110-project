@@ -28,10 +28,18 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Post extends Model
 {
-    protected $fillable = ["text", "user_id", "type"];
+    protected $fillable = ["text", "user_id", "type", "media"];
+    protected $casts = [
+        "media"=>"array"
+    ];
 
     public function user()
     {
         return $this->belongsTo(User::Class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::Class);
     }
 }
